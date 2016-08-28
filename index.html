@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>FFDFDGDFGD</title>
+</head>
+<body>
+	
+	<input id="favefood" type="text" placeholder="Favourite Food" required="required">
+	<input id="favetree" type="text" placeholder="Favourite Tree" required="required">
+	<input id="faverhombus" type="text" placeholder="Favourite Rhombus. I love me a good rhombus xoxo." required="required">
+	<button id="send">Submit</button>
+	<button id="reset">Reset</button>
+
+	<div id="output">
+		
+	</div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script>
+
+	//https://www.smashingmagazine.com/2010/10/local-storage-and-how-to-use-it/
+	
+	function submitLocalStorage() {
+		var favefood = $('#favefood').val();
+		var favetree = $('#favetree').val();
+		var faverhombus = $('#faverhombus').val();
+		localStorage.setItem('favefood', favefood);
+		localStorage.setItem('favetree', favetree);
+		localStorage.setItem('faverhombus', faverhombus);
+	}
+
+	function resetLocalStorage() {
+		localStorage.removeItem('favefood');
+		localStorage.removeItem('favetree');
+		localStorage.removeItem('faverhombus');
+	}
+
+	function outputValues() {
+		var favefood = localStorage.getItem('favefood');
+		var favetree = localStorage.getItem('favetree');
+		var faverhombus = localStorage.getItem('faverhombus');
+		if (favefood === null || favetree === null || faverhombus === null) {
+			$('#output').append('<p>Welcome, you don\'t seem to have any favourite things, can you tell me what they are?</p>');
+		} else {
+			$('#output').append('<p>Welcome, you have favourite things. They are:</p>');
+			$('#output').append('<ul id="listofthings"></ul>');
+			$('#listofthings').append('<li> Favourite food: ' + favefood + '</li>');
+			$('#listofthings').append('<li> Favourite tree: ' + favetree + '</li>');
+			$('#listofthings').append('<li> Favourite rhombus hnnnnng: ' + faverhombus + '</li>');
+		}
+		
+	}
+	
+	document.getElementById('send').addEventListener('click', submitLocalStorage);
+	document.getElementById('reset').addEventListener('click', resetLocalStorage);
+
+	outputValues();
+
+	</script>
+
+</body>
+</html>
